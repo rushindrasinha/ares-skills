@@ -1,61 +1,87 @@
 # ares-skills
 
-Public [OpenClaw](https://openclaw.com) agent skills built by **Ares** — an AI co-founder stack for founders and operators.
+A curated collection of public OpenClaw skills built by **Ares** — practical agent capabilities for operators, creators, and technical founders.
 
-WhatsApp automation, Twitch monitoring, AI chatbots, model behavior frameworks, and more.
+This repository is not a random dump of prompts. It is a packaged skill library covering:
+- automation and media workflows
+- Twitch operations
+- agent safety and observability
+- model behavior and prompt discipline
 
-> Also see: [ares-mbl](https://github.com/rushindrasinha/ares-mbl) — Make any AI model behave more like Claude. 8 named failure modes. Drop-in system prompt.
+> Also see: [ares-mbl](https://github.com/rushindrasinha/ares-mbl) — a portable model behavior layer for making LLMs behave with more discipline.
 
 ---
 
-## Skills Index
+## Repository structure
+
+Each skill is packaged as its own folder and is meant to be understandable on its own.
+
+Every skill contains:
+- `README.md` — product-facing overview, what it does, when to use it, limitations, and navigation
+- `SKILL.md` — canonical operational instructions, requirements, configuration, and usage details
+- `scripts/` — runnable implementation files where needed
+
+---
+
+## Skills
 
 ### Automation & Media
 
-| Skill | Description |
+| Skill | What it does |
 |---|---|
-| 🎙️ [whatsapp-voice-transcriber](./whatsapp-voice-transcriber/) | Transcribe voice notes locally with mlx_whisper (Apple Silicon). Classify content as task, draft, or note. Zero API cost. |
-| 🎵 [song-identifier](./song-identifier/) | Identify songs from audio files via AudD. Returns title, artist, Spotify & Apple Music links. |
-| 🌐 [indic-language-translator](./indic-language-translator/) | Translate to/from 13 Indian + 10 global languages using Gemini 2.5 Flash. CLI + module. |
+| [whatsapp-voice-transcriber](./whatsapp-voice-transcriber/) | Local voice-note transcription on Apple Silicon using mlx_whisper, with lightweight content classification. |
+| [song-identifier](./song-identifier/) | Identify songs from audio clips and return structured metadata plus listening links. |
+| [indic-language-translator](./indic-language-translator/) | Translate across Indian and global languages in a CLI- and agent-friendly workflow. |
 
 ### Twitch
 
-| Skill | Description |
+| Skill | What it does |
 |---|---|
-| 📺 [twitch-stream-monitor](./twitch-stream-monitor/) | Auto-detect channels going live, record with streamlink, upload to Drive, send notifications. |
-| 🤖 [twitch-ai-chatbot](./twitch-ai-chatbot/) | AI chatbot for Twitch via pure WebSocket IRC. Model-agnostic, configurable trigger word, viewer memory. |
+| [twitch-stream-monitor](./twitch-stream-monitor/) | Detect Twitch channels going live, record automatically, and trigger uploads or notifications. |
+| [twitch-ai-chatbot](./twitch-ai-chatbot/) | Run an AI chatbot in Twitch chat over IRC/WebSocket with configurable trigger words and guardrails. |
 
 ### Agent Operations
 
-| Skill | Description |
+| Skill | What it does |
 |---|---|
-| 🛑 [ai-agent-kill-switch](./ai-agent-kill-switch/) | Phrase-triggered emergency stop for AI agents. Flag-file architecture. Survives restarts. |
-| 🛰️ [gateway-watchdog](./gateway-watchdog/) | Monitor OpenClaw Gateway logs for 429s, auth failures, timeouts. Alert on threshold breach. |
-| 📊 [weekly-cost-report](./weekly-cost-report/) | Parse OpenClaw session logs, aggregate per-model API costs for the last 7 days. |
-| 🔬 [system-state-injection](./system-state-injection/) | Inject live system health into agent context. Eliminates stale-recall failures. |
-| 📸 [weekly-reality-capture](./weekly-reality-capture/) | Auto-generate reality-first weekly logs from memory + git + agent state. |
+| [ai-agent-kill-switch](./ai-agent-kill-switch/) | Emergency stop primitive for autonomous agents. Safe, explicit, and restart-resistant. |
+| [gateway-watchdog](./gateway-watchdog/) | Monitor OpenClaw Gateway logs for failure signatures like auth errors, 429s, and timeouts. |
+| [weekly-cost-report](./weekly-cost-report/) | Parse OpenClaw logs into a usable weekly cost breakdown by model. |
+| [system-state-injection](./system-state-injection/) | Inject live infra and integration state into agent context to reduce stale-recall failures. |
+| [weekly-reality-capture](./weekly-reality-capture/) | Build a reality-first weekly synthesis from logs, git history, and agent state. |
 
 ### Model Behavior & Prompt Engineering
 
-| Skill | Description |
+| Skill | What it does |
 |---|---|
-| 📐 [cricd-prompt-standard](./cricd-prompt-standard/) | The CRICD framework for sub-agent prompts — Context, Relevance, Instruction, Constraints, Demonstration. |
-| 🔄 [critique-loop-protocol](./critique-loop-protocol/) | When and how to run draft → critique → revise loops. Trigger conditions + anti-patterns. |
-| ⚙️ [gstack-coding-discipline](./gstack-coding-discipline/) | 5-tier dispatch for coding tasks — SIMPLE to FULL, matched rigor to risk. |
+| [cricd-prompt-standard](./cricd-prompt-standard/) | Structured prompt format for delegated work: Context, Relevance, Instruction, Constraints, Demonstration. |
+| [critique-loop-protocol](./critique-loop-protocol/) | A clear draft → critique → revise pattern for high-stakes outputs. |
+| [gstack-coding-discipline](./gstack-coding-discipline/) | Scope-aware coding-task dispatch framework, from simple fixes to full implementation pipelines. |
 
 ---
 
-## Usage
+## How to use this repo
 
-Each skill is a self-contained directory with:
-- `SKILL.md` — what it does, how to configure, how to use
-- `scripts/` — runnable scripts (where applicable)
+If you want to explore a skill quickly:
+1. open that skill folder
+2. read `README.md` for the overview
+3. read `SKILL.md` for the exact operational instructions
+4. inspect `scripts/` if you are adapting or extending the implementation
 
-Most skills are designed for [OpenClaw](https://openclaw.com) but work standalone with any agent framework or even plain CLI usage.
+If you want to install or adapt these for your own stack, prefer making configuration explicit instead of baking credentials or environment assumptions into the code.
 
-## Configuration
+---
 
-All skills use **environment variables** for configuration — no hardcoded paths, tokens, or account data. Check each skill's `SKILL.md` for the full env var reference.
+## Design principles
+
+These skills are built around a few non-negotiables:
+- **useful over clever**
+- **operational clarity over prompt mysticism**
+- **configuration over hardcoded personal context**
+- **strong source-of-truth discipline**
+- **agent behavior that stays auditable under pressure**
+
+---
 
 ## License
 
@@ -63,6 +89,4 @@ MIT
 
 ---
 
-*Built by [Ares](https://github.com/rushindrasinha) — Mumbai, India*
-
-<!-- A·R·E·S 🛡️ | Mumbai | 2026-04-05 | github.com/rushindrasinha -->
+Built by [Ares](https://github.com/rushindrasinha)
