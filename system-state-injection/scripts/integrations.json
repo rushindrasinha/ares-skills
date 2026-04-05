@@ -1,0 +1,8 @@
+{
+  "integrations": [
+    {"name": "WhatsApp", "check": "openclaw status 2>&1 | grep -qi 'whatsapp.*linked\\|whatsapp.*ok' && echo linked || echo unknown"},
+    {"name": "Gateway", "check": "openclaw gateway status 2>&1 | grep -qi running && echo running || echo stopped"}
+  ],
+  "output_path": "~/agent-workspace/brain/system_state.json",
+  "timezone_offset_hours": 0
+}
